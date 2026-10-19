@@ -1,0 +1,25 @@
+PROMPT: AI-Powered Vehicle Recognition Android App
+Objective: Build an Android application in Kotlin that allows users to select an image of a car from their device gallery and upload it to a cloud AI recognition API to detect and display the vehicle's make, model, and color.
+Tech Stack & Architecture:
+    • Language: Kotlin (ComponentActivity)
+    • Asynchronous Processing: Kotlin Coroutines (Dispatchers.IO for network requests, Dispatchers.Main for UI updates)
+    • Networking: Retrofit 2 with Gson Converter (com.squareup.retrofit2:retrofit, converter-gson, okhttp)
+    • UI Layout: XML layout (LinearLayout, ImageView for preview, Button for picking/scanning, TextView for results)
+    • Image Handling: ActivityResultContracts.GetContent() to select images from device storage and convert them to temporary files (File, RequestBody, MultipartBody.Part)
+API Specifications:
+    • Base URL: [https://api.anpr.software/](https://api.anpr.software/)
+    • Endpoint: POST v1/car
+    • Headers: Authorization: Bearer e6c10e04664e8cca31cc9f5591e7b25b621d60c6b087930313d4f0435cadb784
+    • Multipart Parameter Name: file (sending image binary data)
+JSON Response Data Structure:
+    • The API returns a nested response containing:
+        ◦ success (Boolean)
+        ◦ body (Object containing vehicle attributes)
+            ▪ brand -> label (Make/Brand string)
+            ▪ model / car_model -> label (Model string)
+            ▪ color -> name (Color string)
+Core Functional Requirements:
+    1. Clean user interface with responsive button states and visual preview of the selected car image.
+    2. Robust exception handling for network connection errors and server responses (e.g., catching 404/422 status codes and connection drops).
+    3. Clean parsing of nested JSON objects into Kotlin data classes with fallback to "Unknown" if fields are null.
+
